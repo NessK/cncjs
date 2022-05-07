@@ -32,7 +32,6 @@ import {
     GRBL,
     GRBL_ACTIVE_STATE_RUN,
     GRBL_ACTIVE_STATE_HOLD,
-    GRBL_REALTIME_COMMANDS,
     GRBL_ALARMS,
     GRBL_ERRORS,
     GRBL_SETTINGS
@@ -1392,7 +1391,19 @@ class GrblController {
     }
 
     writeln(data, context) {
-        if (_.includes(GRBL_REALTIME_COMMANDS, data)) {
+        /**
+         * https://github.com/gnea/grbl/blob/master/doc/markdown/commands.md#grbl-v11-realtime-commands
+         */
+        const isASCIIRealtimeCommand = _.includes([
+            '\x18', // Soft-Reset (Ctrl-X)
+            '?', // Status Report Query
+            '~', // Cycle Start / Resume
+            '!', // Feed Hold
+        ], data);
+        const isExtendedASCIIRealtimeCommand = String(data).match(/[\x80-\xff]/);
+        const isRealtimeCommand = isASCIIRealtimeCommand || isExtendedASCIIRealtimeCommand;
+
+        if (isRealtimeCommand) {
             this.write(data, context);
         } else {
             this.write(data + '\n', context);
