@@ -470,7 +470,6 @@ class GrblController {
             this.emit('serialport:read', res.raw);
 
             // Feeder
-            this.feeder.ack();
             this.feeder.next();
         });
 
@@ -516,7 +515,6 @@ class GrblController {
             }
 
             // Feeder
-            this.feeder.ack();
             this.feeder.next();
         });
 
@@ -1149,8 +1147,8 @@ class GrblController {
                 this.workflow.resume();
             },
             'feeder:feed': () => {
-                const [commands, context = {}] = args;
-                this.command('gcode', commands, context);
+                const [commands, context, options] = args;
+                this.command('gcode', commands, context, options);
             },
             'feeder:start': () => {
                 if (this.workflow.state === WORKFLOW_STATE_RUNNING) {
@@ -1276,8 +1274,12 @@ class GrblController {
                 ];
                 this.command('gcode', commands);
             },
+            // @param {string|string[]} commands The commands to be added to the queue.
+            // @param {object} [context] The associated context for the commands.
+            // @param {object} [options] The options object.
+            // @param {string} [options.direction] The direction can be one of 'prepend' or 'append' (default). It's used to instruct the feeder to insert data to the beginning or the end of the queue.
             'gcode': () => {
-                const [commands, context] = args;
+                const [commands, context, options] = args;
                 const data = ensureArray(commands)
                     .join('\n')
                     .split(/\r?\n/)
@@ -1289,7 +1291,7 @@ class GrblController {
                         return line.trim().length > 0;
                     });
 
-                this.feeder.feed(data, context);
+                this.feeder.feed(data, context, options);
 
                 if (!this.feeder.isPending()) {
                     this.feeder.next();
@@ -1348,19 +1350,15 @@ class GrblController {
                 });
             },
             'jogCancel': () => {
-                // The GRBL jog cancel command (0x85) is a realtime command, so it will
-                // be handled by GRBL as soon as it enters the serial buffer. If there
-                // are any unparsed jog commands ($J=) in GRBL's serial buffer the
-                // cancel command will skip ahead of them and cancel any parsed jog
-                // commands, but then the unparsed jog command will be parsed and jog
-                // one more time.  Wait until all the commands sent by the feeder have
-                // been acked to ensure all pending jog commands have been parsed
-                // before sending the jog cancel command.
-                let [context = {}] = args;
-                this.feeder.onEmpty((context) => {
-                    this.command('gcode', '\x85', context);
-                }, context);
-            }
+                const command = '\x85'; // Jog Cancel
+                const context = {}; // empty context
+                const options = {
+                    direction: 'prepend',
+                };
+
+                // Prepend jog cancel (0x85) real-time command to the queue
+                this.command('gcode', command, context, options);
+            },
         }[cmd];
 
         if (!handler) {
