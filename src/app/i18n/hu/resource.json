@@ -276,7 +276,7 @@
     "Move X-": "Mozgás X-",
     "Move To XY Zero (G0 X0 Y0)": "Mozgás az XY Nullára (G0 X0 Y0)",
     "Move X+": "Mozgás X+",
-    "Move To Z Zero (G0 Z6)": "Mozgás a Z Nullára (G0 Z0)",
+    "Move To Z6 (G0 Z6)": "Mozgás a Z Nullára (G0 Z0)",
     "Move X- Y-": "Mozgás X- Y-",
     "Move Y-": "Mozgás Y-",
     "Move X+ Y-": "Mozgás X+ Y-",

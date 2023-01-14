@@ -276,7 +276,7 @@
     "Move X-": "Muovi X-",
     "Move To XY Zero (G0 X0 Y0)": "Muovi XY a zero (G0 X0 Y0)",
     "Move X+": "Muovi X+",
-    "Move To Z Zero (G0 Z6)": "Muovi Z a zero (G0 Z0)",
+    "Move To Z6 (G0 Z6)": "Muovi Z a zero (G0 Z0)",
     "Move X- Y-": "Muovi X- Y-",
     "Move Y-": "Muovi Y-",
     "Move X+ Y-": "Muovi X+ Y-",

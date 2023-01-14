@@ -276,7 +276,7 @@
     "Move X-": "移動 X-",
     "Move To XY Zero (G0 X0 Y0)": "XY原点に移動 (G0 X0 Y0)",
     "Move X+": "移動 X+",
-    "Move To Z Zero (G0 Z6)": "Z原点に移動 (G0 Z0)",
+    "Move To Z6 (G0 Z6)": "Z原点に移動 (G0 Z0)",
     "Move X- Y-": "移動 X- Y-",
     "Move Y-": "移動 Y-",
     "Move X+ Y-": "移動 X+ Y-",

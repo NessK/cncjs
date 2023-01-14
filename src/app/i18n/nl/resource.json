@@ -276,7 +276,7 @@
     "Move X-": "Beweeg X-",
     "Move To XY Zero (G0 X0 Y0)": "Beweeg Naar XY Nul (G0 X0 Y0)",
     "Move X+": "Beweeg X+",
-    "Move To Z Zero (G0 Z6)": "Beweeg Naar Z Nul (G0 Z0)",
+    "Move To Z6 (G0 Z6)": "Beweeg Naar Z Nul (G0 Z0)",
     "Move X- Y-": "Beweeg X- Y-",
     "Move Y-": "Beweeg Y-",
     "Move X+ Y-": "Beweeg X+ Y-",
