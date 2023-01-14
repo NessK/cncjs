@@ -1230,7 +1230,7 @@ class TinyGController {
             'homing': () => {
                 this.event.trigger('homing');
 
-                this.writeln('G28.2 X0 Y0 Z0');
+                this.writeln('$HX Y0 Z0');
             },
             'sleep': () => {
                 this.event.trigger('sleep');
