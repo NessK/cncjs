@@ -313,7 +313,7 @@ class Keypad extends PureComponent {
                                             title={i18n._('Move To Z Zero (G0 Z6)')}
                                         >
                                             <KeypadText>Z</KeypadText>
-                                            <KeypadSubscriptText>0</KeypadSubscriptText>
+                                            <KeypadSubscriptText>6</KeypadSubscriptText>
                                         </Button>
                                     </div>
                                 </div>
