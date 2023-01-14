@@ -308,9 +308,9 @@ class Keypad extends PureComponent {
                                             btnStyle="flat"
                                             compact
                                             className={styles.btnKeypad}
-                                            onClick={() => actions.move({ Z: 0 })}
+                                            onClick={() => actions.move({ Z: 6 })}
                                             disabled={!canClickZ}
-                                            title={i18n._('Move To Z Zero (G0 Z0)')}
+                                            title={i18n._('Move To Z Zero (G0 Z6)')}
                                         >
                                             <KeypadText>Z</KeypadText>
                                             <KeypadSubscriptText>0</KeypadSubscriptText>

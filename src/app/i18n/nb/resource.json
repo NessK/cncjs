@@ -276,7 +276,7 @@
     "Move X-": "Beveg X-",
     "Move To XY Zero (G0 X0 Y0)": "Beveg til nullpunkt for XY (G0 X0 Y0)",
     "Move X+": "Beveg X+",
-    "Move To Z Zero (G0 Z0)": "Beveg til nullpunkt for Z (G0 Z0)",
+    "Move To Z Zero (G0 Z6)": "Beveg til nullpunkt for Z (G0 Z0)",
     "Move X- Y-": "Beveg X- Y-",
     "Move Y-": "Beveg Y-",
     "Move X+ Y-": "Beveg X+ Y-",
