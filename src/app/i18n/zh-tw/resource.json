@@ -276,7 +276,7 @@
   "Move X-": "X 軸逆向移動",
   "Move To XY Zero (G0 X0 Y0)": "移動至 XY 軸原點 (G0 X0 Y0)",
   "Move X+": "X 軸正向移動",
-  "Move To Z Zero (G0 Z0)": "移動至 Z 軸原點 (G0 Z0)",
+  "Move To Z Zero (G0 Z6)": "移動至 Z 軸原點 (G0 Z0)",
   "Move X- Y-": "X 軸逆向 Y 軸逆向移動",
   "Move Y-": "Y 軸逆向移動",
   "Move X+ Y-": "X 軸正向 Y 軸逆向移動",

@@ -509,7 +509,7 @@ class DisplayPanel extends PureComponent {
               <MenuItem header>{i18n._('Work Coordinate System (G59)')}</MenuItem>
             }
             <MenuItem
-              eventKey="G0 Z0"
+              eventKey="G0 Z6"
               disabled={!canClick}
             >
               {i18n._('Go To Work Zero On Z Axis (G0 Z0)')}
