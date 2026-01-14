@@ -1015,7 +1015,7 @@ class DisplayPanel extends PureComponent {
         [AXIS_B]: this.renderActionDropdownForAxisB,
         [AXIS_C]: this.renderActionDropdownForAxisC
       }[axis] || noop;
-      const canZeroOutMachine = canClick;
+      const canZeroOutMachine = false;
       const canHomeMachine = canClick;
       const canMoveBackward = canClick;
       const canMoveForward = canClick;
