@@ -37,30 +37,14 @@ export const IMPERIAL_STEPS = [
 // Metric System
 export const METRIC_UNITS = 'mm';
 export const METRIC_STEPS = [
-  0.001,
-  0.002,
-  0.003,
-  0.005,
-  0.01,
-  0.02,
-  0.03,
-  0.05,
+
   0.1,
-  0.2,
-  0.3,
   0.5,
   1, // Default
-  2,
   3,
   5,
   10,
-  20,
-  30,
-  50,
-  100,
-  200,
-  300,
-  500
+
 ];
 
 // Controller
