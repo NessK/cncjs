@@ -1354,7 +1354,7 @@ class GrblController {
         'feedhold': () => {
           this.event.trigger('feedhold');
 
-          this.write('!');
+          this.write('\x84'); //this.write('!');
         },
         'cyclestart': () => {
           this.event.trigger('cyclestart');
