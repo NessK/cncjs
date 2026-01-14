@@ -1055,12 +1055,12 @@ class DisplayPanel extends PureComponent {
                   <TaskbarButton
                     disabled={!canHomeMachine}
                     onClick={() => {
-                      controller.command('gcode', `G28.2 ${axisLabel}0`);
+                      controller.command('gcode', `$H${axisLabel}`);
                     }}
                   >
                     <Tooltip
                       placement="bottom"
-                      content={i18n._('Home Machine')}
+                      content={i18n._('Home Axis')}
                       disabled={!canHomeMachine}
                       hideOnClick
                     >
