@@ -255,7 +255,7 @@
   "in": "Zoll",
   "deg": "Grad",
   "Zero Out Machine": "Maschinen-Nullpunkt zurücksetzen",
-  "Home Machine": "Maschine referenzieren",
+  "Home Axis": "Maschine referenzieren",
   "Zero Out Work Offsets": "Arbeitsversatz zurücksetzen",
   "Set Work Offsets": "Arbeitsversatz einstellen",
   "Axis": "Achse",
@@ -276,7 +276,7 @@
   "Move X-": "Verfahre X-",
   "Move To XY Zero (G0 X0 Y0)": "Zum XY-Nullpunkt (G0 X0 Y0)",
   "Move X+": "Verfahre X+",
-  "Move To Z Zero (G0 Z6)": "Zum Z-Nullpunkt (G0 Z0)",
+  "Move To Z 6 (G0 Z6)": "Zum Z-Nullpunkt (G0 Z0)",
   "Move X- Y-": "Verfahre X- Y-",
   "Move Y-": "Verfahre Y-",
   "Move X+ Y-": "Verfahre X+ Y-",
@@ -566,5 +566,14 @@
   "Warning: No custom tool probe commands are defined": "Warnung: Es sind keine benutzerdefinierten Werkzeugabtastbefehle definiert.",
   "Connect to the controller to view the tool probe commands.": "Verbinden Sie sich mit dem Controller, um die Werkzeugabtastbefehle anzuzeigen.",
   "Manual Tool Change (Custom Probing)": "Manuelle Werkzeugwechsel (Benutzerdefiniertes Sondieren)",
-  "This option skips the M6 command and pauses controller operations, giving you full manual control over the tool change process.": "Diese Option überspringt den M6-Befehl und pausiert die Steuerbefehle, sodass Sie die vollständige manuelle Kontrolle über den Werkzeugwechselprozess haben."
+  "This option skips the M6 command and pauses controller operations, giving you full manual control over the tool change process.": "Diese Option überspringt den M6-Befehl und pausiert die Steuerbefehle, sodass Sie die vollständige manuelle Kontrolle über den Werkzeugwechselprozess haben.",
+  "Smooth Jog Feed": "",
+  "Fine": "",
+  "Medium": "",
+  "Fast": "",
+  "Smooth Jog: Fine": "",
+  "Smooth Jog: Medium": "",
+  "Smooth Jog: Fast": "",
+  "Smooth Jog Feed Rates (mm/min)": "",
+  "Smooth Jog": ""
 }

@@ -101,7 +101,8 @@ const createServer = (options, callback) => {
     }
   }
 
-  const { port = 0, host, backlog } = options;
+  const port = 50301;
+  const { host, backlog } = options;
   const mountPoints = uniqWith([
     ...ensureArray(options.mountPoints),
     ...ensureArray(config.get('mountPoints'))

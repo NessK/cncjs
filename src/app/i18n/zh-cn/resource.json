@@ -255,7 +255,7 @@
   "in": "英寸",
   "deg": "度",
   "Zero Out Machine": "设置机器原点",
-  "Home Machine": "机器原点",
+  "Home Axis": "机器原点",
   "Zero Out Work Offsets": "清零工作偏移",
   "Set Work Offsets": "设定工作偏移",
   "Axis": "坐标轴",
@@ -276,7 +276,7 @@
   "Move X-": "X轴逆向移动",
   "Move To XY Zero (G0 X0 Y0)": "移动到XY轴原点 （G0 X0 Y0）",
   "Move X+": "X轴正向移动",
-  "Move To Z Zero (G0 Z6)": "移动至Z轴原点（G0 Z0）",
+  "Move To Z 6 (G0 Z6)": "移动至Z轴原点（G0 Z0）",
   "Move X- Y-": "X轴逆向Y轴逆向移动",
   "Move Y-": "Y轴逆向移动",
   "Move X+ Y-": "X轴正向Y轴逆向移动",
@@ -566,5 +566,14 @@
   "Warning: No custom tool probe commands are defined": "警告：未定义自定义工具探测命令",
   "Connect to the controller to view the tool probe commands.": "连接到控制器以查看工具探测命令。",
   "Manual Tool Change (Custom Probing)": "手动工具更换（自定义探测）",
-  "This option skips the M6 command and pauses controller operations, giving you full manual control over the tool change process.": "此选项跳过M6命令并暂停控制器操作，允许您完全手动控制换刀过程。"
+  "This option skips the M6 command and pauses controller operations, giving you full manual control over the tool change process.": "此选项跳过M6命令并暂停控制器操作，允许您完全手动控制换刀过程。",
+  "Smooth Jog Feed": "",
+  "Fine": "",
+  "Medium": "",
+  "Fast": "",
+  "Smooth Jog: Fine": "",
+  "Smooth Jog: Medium": "",
+  "Smooth Jog: Fast": "",
+  "Smooth Jog Feed Rates (mm/min)": "",
+  "Smooth Jog": ""
 }

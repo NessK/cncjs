@@ -22,6 +22,7 @@ const Axes = (props) => {
         canClick={state.canClick}
         units={state.units}
         axes={state.axes}
+        controllerType={state.controller.type}
         jog={state.jog}
         actions={actions}
       />

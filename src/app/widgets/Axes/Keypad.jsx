@@ -10,10 +10,12 @@ import styled from 'styled-components';
 import { Button } from 'app/components/Buttons';
 import Dropdown, { MenuItem } from 'app/components/Dropdown';
 import Space from 'app/components/Space';
+import ToggleSwitch from 'app/components/ToggleSwitch';
 import controller from 'app/lib/controller';
 import i18n from 'app/lib/i18n';
 import Fraction from './components/Fraction';
 import {
+  GRBL,
   IMPERIAL_UNITS,
   IMPERIAL_STEPS,
   METRIC_UNITS,
@@ -37,11 +39,16 @@ const KeypadSubscriptText = styled(KeypadText)`
     line-height: 0;
 `;
 
+const SMOOTH_JOG_PROFILE_FINE = 'fine';
+const SMOOTH_JOG_PROFILE_MEDIUM = 'medium';
+const SMOOTH_JOG_PROFILE_FAST = 'fast';
+
 class Keypad extends PureComponent {
     static propTypes = {
       canClick: PropTypes.bool,
       units: PropTypes.oneOf([IMPERIAL_UNITS, METRIC_UNITS]),
       axes: PropTypes.array,
+      controllerType: PropTypes.string,
       jog: PropTypes.object,
       actions: PropTypes.object
     };
@@ -128,9 +135,11 @@ class Keypad extends PureComponent {
     }
 
     render() {
-      const { canClick, units, axes, jog, actions } = this.props;
+      const { canClick, units, axes, controllerType, jog, actions } = this.props;
       const canChangeUnits = canClick;
       const canChangeStep = canClick;
+      const canChangeSmoothJogProfile = canClick;
+      const showSmoothJogProfile = (controllerType === GRBL);
       const imperialJogDistances = ensureArray(jog.imperial.distances);
       const metricJogDistances = ensureArray(jog.metric.distances);
       const imperialJogSteps = [
@@ -562,6 +571,72 @@ class Keypad extends PureComponent {
               </div>
             </div>
           </div>
+          {showSmoothJogProfile && (
+            <div className={styles.rowSpace} style={{ marginTop: 5 }}>
+              <div className="row no-gutters">
+                <div className="col-xs-5">
+                  <div
+                    style={{
+                      width: '100%',
+                      marginRight: 2.5,
+                      minHeight: 30,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      padding: '0 6px',
+                      border: '1px solid #ccc',
+                      borderRadius: 3
+                    }}
+                  >
+                    <span>{i18n._('Smooth Jog')}</span>
+                    <ToggleSwitch
+                      checked={!!jog.smoothJogEnabled}
+                      disabled={!canChangeSmoothJogProfile}
+                      onChange={actions.toggleSmoothJogEnabled}
+                    />
+                  </div>
+                </div>
+                <div className="col-xs-7">
+                  <Dropdown
+                    style={{
+                      width: '100%',
+                      marginLeft: 2.5
+                    }}
+                    disabled={!canChangeSmoothJogProfile || !jog.smoothJogEnabled}
+                    onSelect={(eventKey) => {
+                      actions.selectSmoothJogProfile(eventKey);
+                    }}
+                  >
+                    <Dropdown.Toggle
+                      btnStyle="flat"
+                      style={{
+                        textAlign: 'left',
+                        width: '100%'
+                      }}
+                    >
+                      {jog.smoothJogProfile === SMOOTH_JOG_PROFILE_FINE && i18n._('Smooth Jog: Fine')}
+                      {jog.smoothJogProfile === SMOOTH_JOG_PROFILE_MEDIUM && i18n._('Smooth Jog: Medium')}
+                      {jog.smoothJogProfile === SMOOTH_JOG_PROFILE_FAST && i18n._('Smooth Jog: Fast')}
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      <MenuItem header>
+                        {i18n._('Smooth Jog Feed')}
+                      </MenuItem>
+                      <MenuItem eventKey={SMOOTH_JOG_PROFILE_FINE}>
+                        {i18n._('Fine')}
+                      </MenuItem>
+                      <MenuItem eventKey={SMOOTH_JOG_PROFILE_MEDIUM}>
+                        {i18n._('Medium')}
+                      </MenuItem>
+                      <MenuItem eventKey={SMOOTH_JOG_PROFILE_FAST}>
+                        {i18n._('Fast')}
+                      </MenuItem>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       );
     }

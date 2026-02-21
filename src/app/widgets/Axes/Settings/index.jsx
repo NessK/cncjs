@@ -56,6 +56,13 @@ class Settings extends PureComponent {
           },
           metric: {
             distances: ensureArray(this.config.get('jog.metric.distances', []))
+          },
+          smoothJog: {
+            feedrate: {
+              fine: this.config.get('jog.smoothJog.feedrate.fine', 200),
+              medium: this.config.get('jog.smoothJog.feedrate.medium', 800),
+              fast: this.config.get('jog.smoothJog.feedrate.fast', 2000)
+            }
           }
         }
       },
@@ -84,12 +91,18 @@ class Settings extends PureComponent {
       const {
         axes = DEFAULT_AXES,
         imperialJogDistances,
-        metricJogDistances
+        metricJogDistances,
+        smoothJogFeedrateFine,
+        smoothJogFeedrateMedium,
+        smoothJogFeedrateFast
       } = this.node.general.value;
 
       this.config.replace('axes', ensureArray(axes));
       this.config.replace('jog.imperial.distances', ensureArray(imperialJogDistances));
       this.config.replace('jog.metric.distances', ensureArray(metricJogDistances));
+      this.config.set('jog.smoothJog.feedrate.fine', smoothJogFeedrateFine);
+      this.config.set('jog.smoothJog.feedrate.medium', smoothJogFeedrateMedium);
+      this.config.set('jog.smoothJog.feedrate.fast', smoothJogFeedrateFast);
 
       // ShuttleXpress
       const { feedrateMin, feedrateMax, hertz, overshoot } = this.node.shuttleXpress.state;
@@ -136,6 +149,9 @@ class Settings extends PureComponent {
                   axes={general.axes}
                   imperialJogDistances={general.jog.imperial.distances}
                   metricJogDistances={general.jog.metric.distances}
+                  smoothJogFeedrateFine={general.jog.smoothJog.feedrate.fine}
+                  smoothJogFeedrateMedium={general.jog.smoothJog.feedrate.medium}
+                  smoothJogFeedrateFast={general.jog.smoothJog.feedrate.fast}
                 />
               </TabPane>
               <TabPane active={this.state.activeKey === 'mdi'}>

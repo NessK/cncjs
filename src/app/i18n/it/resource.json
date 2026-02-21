@@ -255,7 +255,7 @@
   "in": "in",
   "deg": "gradi",
   "Zero Out Machine": "Azzeramento Macchina",
-  "Home Machine": "Homing Macchina",
+  "Home Axis": "Homing Macchina",
   "Zero Out Work Offsets": "Azzeramento Offsets Lavoro",
   "Set Work Offsets": "Imposta Offsets Lavoro",
   "Axis": "Asse",
@@ -276,7 +276,7 @@
   "Move X-": "Muovi X-",
   "Move To XY Zero (G0 X0 Y0)": "Muovi XY a zero (G0 X0 Y0)",
   "Move X+": "Muovi X+",
-  "Move To Z Zero (G0 Z6)": "Muovi Z a zero (G0 Z0)",
+  "Move To Z 6 (G0 Z6)": "Muovi Z a zero (G0 Z0)",
   "Move X- Y-": "Muovi X- Y-",
   "Move Y-": "Muovi Y-",
   "Move X+ Y-": "Muovi X+ Y-",
@@ -566,5 +566,14 @@
   "Warning: No custom tool probe commands are defined": "Avviso: Non sono definiti comandi personalizzati della sonda utensile",
   "Connect to the controller to view the tool probe commands.": "Connettiti al controller per visualizzare i comandi della sonda utensile.",
   "Manual Tool Change (Custom Probing)": "Cambio Utensile Manuale (Misurazione personalizzata)",
-  "This option skips the M6 command and pauses controller operations, giving you full manual control over the tool change process.": "Questa opzione salta il comando M6 e pausa le operazioni del controller, dandoti il pieno controllo manuale sul processo di cambio utensile."
+  "This option skips the M6 command and pauses controller operations, giving you full manual control over the tool change process.": "Questa opzione salta il comando M6 e pausa le operazioni del controller, dandoti il pieno controllo manuale sul processo di cambio utensile.",
+  "Smooth Jog Feed": "",
+  "Fine": "",
+  "Medium": "",
+  "Fast": "",
+  "Smooth Jog: Fine": "",
+  "Smooth Jog: Medium": "",
+  "Smooth Jog: Fast": "",
+  "Smooth Jog Feed Rates (mm/min)": "",
+  "Smooth Jog": ""
 }

@@ -21,7 +21,10 @@ class General extends PureComponent {
     static propTypes = {
       axes: PropTypes.array.isRequired,
       imperialJogDistances: PropTypes.array.isRequired,
-      metricJogDistances: PropTypes.array.isRequired
+      metricJogDistances: PropTypes.array.isRequired,
+      smoothJogFeedrateFine: PropTypes.number,
+      smoothJogFeedrateMedium: PropTypes.number,
+      smoothJogFeedrateFast: PropTypes.number
     };
 
     field = {
@@ -35,7 +38,10 @@ class General extends PureComponent {
 
     state = {
       imperialJogDistances: ensureArray(this.props.imperialJogDistances),
-      metricJogDistances: ensureArray(this.props.metricJogDistances)
+      metricJogDistances: ensureArray(this.props.metricJogDistances),
+      smoothJogFeedrateFine: this.props.smoothJogFeedrateFine || 200,
+      smoothJogFeedrateMedium: this.props.smoothJogFeedrateMedium || 800,
+      smoothJogFeedrateFast: this.props.smoothJogFeedrateFast || 2000
     };
 
     get value() {
@@ -69,7 +75,10 @@ class General extends PureComponent {
       return {
         axes,
         imperialJogDistances,
-        metricJogDistances
+        metricJogDistances,
+        smoothJogFeedrateFine: Number(this.state.smoothJogFeedrateFine) || 200,
+        smoothJogFeedrateMedium: Number(this.state.smoothJogFeedrateMedium) || 800,
+        smoothJogFeedrateFast: Number(this.state.smoothJogFeedrateFast) || 2000
       };
     }
 
@@ -139,9 +148,27 @@ class General extends PureComponent {
       });
     };
 
+    changeSmoothJogFeedrateFine = (event) => {
+      this.setState({ smoothJogFeedrateFine: event.target.value });
+    };
+
+    changeSmoothJogFeedrateMedium = (event) => {
+      this.setState({ smoothJogFeedrateMedium: event.target.value });
+    };
+
+    changeSmoothJogFeedrateFast = (event) => {
+      this.setState({ smoothJogFeedrateFast: event.target.value });
+    };
+
     render() {
       const { axes } = this.props;
-      const { imperialJogDistances, metricJogDistances } = this.state;
+      const {
+        imperialJogDistances,
+        metricJogDistances,
+        smoothJogFeedrateFine,
+        smoothJogFeedrateMedium,
+        smoothJogFeedrateFast
+      } = this.state;
 
       return (
         <FlexContainer fluid gutterWidth={0}>
@@ -299,6 +326,47 @@ class General extends PureComponent {
                     {i18n._('Add')}
                   </Button>
                 )}
+              </Col>
+            </Row>
+          </Margin>
+          <Margin bottom={15}>
+            <label><strong>{i18n._('Smooth Jog Feed Rates (mm/min)')}</strong></label>
+            <Row>
+              <Col xs={4}>
+                <FormGroup>
+                  <label>{i18n._('Fine')}</label>
+                  <Input
+                    type="number"
+                    min="1"
+                    step="1"
+                    value={smoothJogFeedrateFine}
+                    onChange={this.changeSmoothJogFeedrateFine}
+                  />
+                </FormGroup>
+              </Col>
+              <Col xs={4}>
+                <FormGroup>
+                  <label>{i18n._('Medium')}</label>
+                  <Input
+                    type="number"
+                    min="1"
+                    step="1"
+                    value={smoothJogFeedrateMedium}
+                    onChange={this.changeSmoothJogFeedrateMedium}
+                  />
+                </FormGroup>
+              </Col>
+              <Col xs={4}>
+                <FormGroup>
+                  <label>{i18n._('Fast')}</label>
+                  <Input
+                    type="number"
+                    min="1"
+                    step="1"
+                    value={smoothJogFeedrateFast}
+                    onChange={this.changeSmoothJogFeedrateFast}
+                  />
+                </FormGroup>
               </Col>
             </Row>
           </Margin>

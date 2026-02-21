@@ -52,6 +52,20 @@ import {
 } from './constants';
 import styles from './index.styl';
 
+const SMOOTH_JOG_PROFILE_FINE = 'fine';
+const SMOOTH_JOG_PROFILE_MEDIUM = 'medium';
+const SMOOTH_JOG_PROFILE_FAST = 'fast';
+const SMOOTH_JOG_PROFILES = [
+  SMOOTH_JOG_PROFILE_FINE,
+  SMOOTH_JOG_PROFILE_MEDIUM,
+  SMOOTH_JOG_PROFILE_FAST
+];
+const SMOOTH_JOG_FEEDRATES_MM_PER_MIN = {
+  [SMOOTH_JOG_PROFILE_FINE]: 200,
+  [SMOOTH_JOG_PROFILE_MEDIUM]: 800,
+  [SMOOTH_JOG_PROFILE_FAST]: 2000
+};
+
 class AxesWidget extends PureComponent {
     static propTypes = {
       widgetId: PropTypes.string.isRequired,
@@ -72,6 +86,11 @@ class AxesWidget extends PureComponent {
     config = new WidgetConfig(this.props.widgetId);
 
     state = this.getInitialState();
+    smoothJogThrottle = {
+      x: 0,
+      y: 0,
+      z: 0
+    };
 
     actions = {
       toggleFullscreen: () => {
@@ -228,6 +247,39 @@ class AxesWidget extends PureComponent {
           }
         }));
       },
+      selectSmoothJogProfile: (value = SMOOTH_JOG_PROFILE_MEDIUM) => {
+        if (!includes(SMOOTH_JOG_PROFILES, value)) {
+          return;
+        }
+
+        this.setState(state => ({
+          jog: {
+            ...state.jog,
+            smoothJogProfile: value
+          }
+        }));
+      },
+      toggleSmoothJogEnabled: () => {
+        this.setState(state => ({
+          jog: {
+            ...state.jog,
+            smoothJogEnabled: !state.jog.smoothJogEnabled
+          }
+        }));
+      },
+      getSmoothJogFeedrate: () => {
+        const profile = this.state.jog.smoothJogProfile;
+        const configuredFeedrates = this.state.jog.smoothJogFeedrates || {};
+        const mmPerMin = Number(configuredFeedrates[profile]) ||
+          SMOOTH_JOG_FEEDRATES_MM_PER_MIN[SMOOTH_JOG_PROFILE_MEDIUM];
+
+        if (this.state.units === IMPERIAL_UNITS) {
+          // Convert mm/min to in/min when machine units are inches.
+          return (mmPerMin / 25.4).toFixed(3) * 1;
+        }
+
+        return mmPerMin;
+      },
       stepForward: () => {
         this.setState(state => {
           const imperialJogSteps = [
@@ -335,7 +387,7 @@ class AxesWidget extends PureComponent {
         }
       },
       JOG: (event, { axis = null, direction = 1, factor = 1 }) => {
-        const { canClick, jog } = this.state;
+        const { canClick, jog, controller: controllerState } = this.state;
 
         if (!canClick) {
           return;
@@ -352,6 +404,31 @@ class AxesWidget extends PureComponent {
         preventDefault(event);
 
         axis = axis || jog.axis;
+        if (
+          controllerState.type === GRBL &&
+          jog.smoothJogEnabled &&
+          includes(['x', 'y', 'z'], axis)
+        ) {
+          const units = this.state.units;
+          const feedrate = this.actions.getSmoothJogFeedrate();
+          const distance = Number((direction * this.actions.getJogDistance() * factor).toFixed(4));
+          const axisKey = axis.toLowerCase();
+          const minInterval = this.getSmoothJogThrottleInterval(distance, feedrate);
+          const now = Date.now();
+
+          if (now - (this.smoothJogThrottle[axisKey] || 0) < minInterval) {
+            return;
+          }
+          this.smoothJogThrottle[axisKey] = now;
+
+          const command = '$J=G91' +
+            ((units === IMPERIAL_UNITS) ? ' G20' : ' G21') +
+            ' ' + axis.toUpperCase() + distance +
+            ' F' + feedrate;
+          controller.command('gcode', command);
+          return;
+        }
+
         const distance = this.actions.getJogDistance();
         const jogAxis = {
           x: () => this.actions.jog({ X: direction * distance * factor }),
@@ -609,11 +686,13 @@ class AxesWidget extends PureComponent {
       this.fetchMDICommands();
       this.addControllerEvents();
       this.addShuttleControlEvents();
+      window.addEventListener('keyup', this.handleSmoothJogKeyUp);
     }
 
     componentWillUnmount() {
       this.removeControllerEvents();
       this.removeShuttleControlEvents();
+      window.removeEventListener('keyup', this.handleSmoothJogKeyUp);
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -634,6 +713,11 @@ class AxesWidget extends PureComponent {
       if (units === METRIC_UNITS) {
         this.config.set('jog.metric.step', Number(jog.metric.step) || 0);
       }
+      this.config.set('jog.smoothJog.profile', jog.smoothJogProfile);
+      this.config.set('jog.smoothJog.enabled', jog.smoothJogEnabled);
+      this.config.set('jog.smoothJog.feedrate.fine', Number(jog.smoothJogFeedrates.fine) || SMOOTH_JOG_FEEDRATES_MM_PER_MIN[SMOOTH_JOG_PROFILE_FINE]);
+      this.config.set('jog.smoothJog.feedrate.medium', Number(jog.smoothJogFeedrates.medium) || SMOOTH_JOG_FEEDRATES_MM_PER_MIN[SMOOTH_JOG_PROFILE_MEDIUM]);
+      this.config.set('jog.smoothJog.feedrate.fast', Number(jog.smoothJogFeedrates.fast) || SMOOTH_JOG_FEEDRATES_MM_PER_MIN[SMOOTH_JOG_PROFILE_FAST]);
       this.config.set('mdi.disabled', mdi.disabled);
     }
 
@@ -683,6 +767,13 @@ class AxesWidget extends PureComponent {
           metric: {
             step: this.config.get('jog.metric.step'),
             distances: ensureArray(this.config.get('jog.metric.distances', []))
+          },
+          smoothJogProfile: this.config.get('jog.smoothJog.profile', SMOOTH_JOG_PROFILE_MEDIUM),
+          smoothJogEnabled: this.config.get('jog.smoothJog.enabled', true),
+          smoothJogFeedrates: {
+            fine: this.config.get('jog.smoothJog.feedrate.fine', SMOOTH_JOG_FEEDRATES_MM_PER_MIN[SMOOTH_JOG_PROFILE_FINE]),
+            medium: this.config.get('jog.smoothJog.feedrate.medium', SMOOTH_JOG_FEEDRATES_MM_PER_MIN[SMOOTH_JOG_PROFILE_MEDIUM]),
+            fast: this.config.get('jog.smoothJog.feedrate.fast', SMOOTH_JOG_FEEDRATES_MM_PER_MIN[SMOOTH_JOG_PROFILE_FAST])
           }
         },
         mdi: {
@@ -732,6 +823,74 @@ class AxesWidget extends PureComponent {
 
       this.shuttleControl.removeAllListeners('flush');
       this.shuttleControl = null;
+    }
+
+    handleSmoothJogKeyUp = (event) => {
+      const { controller: controllerState, jog } = this.state;
+      const key = event.key;
+      const keyCode = event.keyCode || event.which;
+      const smoothJogKey = includes(
+        ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'PageUp', 'PageDown'],
+        key
+      ) || includes([37, 39, 38, 40, 33, 34], keyCode);
+
+      if (!smoothJogKey) {
+        return;
+      }
+      if (!this.canClick()) {
+        return;
+      }
+      if (!jog.keypad) {
+        return;
+      }
+      if (controllerState.type !== GRBL) {
+        return;
+      }
+      if (!jog.smoothJogEnabled) {
+        return;
+      }
+
+      const keyToAxis = {
+        ArrowLeft: 'x',
+        ArrowRight: 'x',
+        ArrowUp: 'y',
+        ArrowDown: 'y',
+        PageUp: 'z',
+        PageDown: 'z'
+      };
+      const axis = keyToAxis[key] || {
+        37: 'x',
+        39: 'x',
+        38: 'y',
+        40: 'y',
+        33: 'z',
+        34: 'z'
+      }[keyCode];
+      if (axis) {
+        this.smoothJogThrottle[axis] = 0;
+      }
+
+      preventDefault(event);
+      controller.command('jogCancel');
+      controller.command('feeder:stop');
+    };
+
+    getSmoothJogThrottleInterval(distance, feedrate) {
+      const d = Math.abs(Number(distance) || 0);
+      const f = Math.abs(Number(feedrate) || 0);
+      if (d <= 0 || f <= 0) {
+        return 100;
+      }
+
+      // Keep motion smooth while limiting queue buildup.
+      // time(ms) = (distance / feedrate) * 60 * 1000
+      const estimatedMoveTime = (d / f) * 60 * 1000;
+      const profile = this.state.jog.smoothJogProfile;
+      if (profile === SMOOTH_JOG_PROFILE_FINE) {
+        return Math.min(400, Math.max(120, Math.round(estimatedMoveTime * 1.7)));
+      }
+
+      return Math.min(120, Math.max(70, Math.round(estimatedMoveTime * 1.05)));
     }
 
     canClick() {
@@ -917,6 +1076,11 @@ class AxesWidget extends PureComponent {
                   const axes = config.get('axes', DEFAULT_AXES);
                   const imperialJogDistances = ensureArray(config.get('jog.imperial.distances', []));
                   const metricJogDistances = ensureArray(config.get('jog.metric.distances', []));
+                  const smoothJogFeedrates = {
+                    fine: config.get('jog.smoothJog.feedrate.fine', SMOOTH_JOG_FEEDRATES_MM_PER_MIN[SMOOTH_JOG_PROFILE_FINE]),
+                    medium: config.get('jog.smoothJog.feedrate.medium', SMOOTH_JOG_FEEDRATES_MM_PER_MIN[SMOOTH_JOG_PROFILE_MEDIUM]),
+                    fast: config.get('jog.smoothJog.feedrate.fast', SMOOTH_JOG_FEEDRATES_MM_PER_MIN[SMOOTH_JOG_PROFILE_FAST])
+                  };
 
                   this.setState(state => ({
                     axes: axes,
@@ -929,7 +1093,8 @@ class AxesWidget extends PureComponent {
                       metric: {
                         ...state.jog.metric,
                         distances: metricJogDistances
-                      }
+                      },
+                      smoothJogFeedrates: smoothJogFeedrates
                     }
                   }));
 

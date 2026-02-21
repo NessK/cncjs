@@ -255,7 +255,7 @@
   "in": "in",
   "deg": "deg",
   "Zero Out Machine": "Makineyi Sıfırla",
-  "Home Machine": "Makineye Referans Dön",
+  "Home Axis": "Makineye Referans Dön",
   "Zero Out Work Offsets": "İş Parçası Ofsetlerini Sıfırla",
   "Set Work Offsets": "İş Parçası Ofsetlerini Ayarla",
   "Axis": "Eksen",
@@ -276,7 +276,7 @@
   "Move X-": "X- Git",
   "Move To XY Zero (G0 X0 Y0)": "XY Sıfırına git(G0 X0 Y0)",
   "Move X+": "X+ Git",
-  "Move To Z Zero (G0 Z6)": "Z Sıfırına git (G0 Z0)",
+  "Move To Z 6 (G0 Z6)": "Z Sıfırına git (G0 Z0)",
   "Move X- Y-": "Git X- Y-",
   "Move Y-": "Y- Git",
   "Move X+ Y-": "Git X+ Y-",
@@ -566,5 +566,14 @@
   "Warning: No custom tool probe commands are defined": "Uyarı: Tanımlı özel takım probu komutları yok",
   "Connect to the controller to view the tool probe commands.": "Takım probu komutlarını görüntülemek için denetleyiciye bağlanın",
   "Manual Tool Change (Custom Probing)": "Manuel Takım Değişimi (Özelleştirilmiş Probing)",
-  "This option skips the M6 command and pauses controller operations, giving you full manual control over the tool change process.": "Bu seçenek M6 komutunu atlar ve denetleyici işlemleri duraklatır, takım değiştirme süreci üzerinde tam manuel kontrol sağlar."
+  "This option skips the M6 command and pauses controller operations, giving you full manual control over the tool change process.": "Bu seçenek M6 komutunu atlar ve denetleyici işlemleri duraklatır, takım değiştirme süreci üzerinde tam manuel kontrol sağlar.",
+  "Smooth Jog Feed": "",
+  "Fine": "",
+  "Medium": "",
+  "Fast": "",
+  "Smooth Jog: Fine": "",
+  "Smooth Jog: Medium": "",
+  "Smooth Jog: Fast": "",
+  "Smooth Jog Feed Rates (mm/min)": "",
+  "Smooth Jog": ""
 }

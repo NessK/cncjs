@@ -255,7 +255,7 @@
   "in": "in",
   "deg": "stupňů",
   "Zero Out Machine": "Nulovat stroj",
-  "Home Machine": "Home stroj",
+  "Home Axis": "Home stroj",
   "Zero Out Work Offsets": "Nulovat pracovní offsety",
   "Set Work Offsets": "Nastavit pracovní offsety",
   "Axis": "Osa",
@@ -276,7 +276,7 @@
   "Move X-": "Posuv X-",
   "Move To XY Zero (G0 X0 Y0)": "Posuv na nulu os XY (G0 X0 Y0)",
   "Move X+": "Posuv X+",
-  "Move To Z Zero (G0 Z6)": "Posuv na nulu osy Z (G0 Z0)",
+  "Move To Z 6 (G0 Z6)": "Posuv na nulu osy Z (G0 Z0)",
   "Move X- Y-": "Posuv X- Y-",
   "Move Y-": "Posuv Y-",
   "Move X+ Y-": "Posuv X+ Y-",
@@ -566,5 +566,14 @@
   "Warning: No custom tool probe commands are defined": "Upozornění: Nejsou definovány žádné vlastní příkazy pro sondování nástroje.",
   "Connect to the controller to view the tool probe commands.": "Připojte se k řadiči, abyste zobrazili příkazy pro sondování nástroje.",
   "Manual Tool Change (Custom Probing)": "Manuální výměna nástroje (Vlastní sondování)",
-  "This option skips the M6 command and pauses controller operations, giving you full manual control over the tool change process.": "Tato možnost přeskočí příkaz M6 a pozastaví operace řadiče, čímž vám poskytne plnou manuální kontrolu nad procesem výměny nástroje."
+  "This option skips the M6 command and pauses controller operations, giving you full manual control over the tool change process.": "Tato možnost přeskočí příkaz M6 a pozastaví operace řadiče, čímž vám poskytne plnou manuální kontrolu nad procesem výměny nástroje.",
+  "Smooth Jog Feed": "",
+  "Fine": "",
+  "Medium": "",
+  "Fast": "",
+  "Smooth Jog: Fine": "",
+  "Smooth Jog: Medium": "",
+  "Smooth Jog: Fast": "",
+  "Smooth Jog Feed Rates (mm/min)": "",
+  "Smooth Jog": ""
 }

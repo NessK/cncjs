@@ -255,7 +255,7 @@
   "in": "tommer",
   "deg": "gra",
   "Zero Out Machine": "Nullstill maskinkoordinater",
-  "Home Machine": "Home maskinen",
+  "Home Axis": "Home maskinen",
   "Zero Out Work Offsets": "Nullstill offset for jobb",
   "Set Work Offsets": "Sett offset for jobb",
   "Axis": "Akser",
@@ -276,7 +276,7 @@
   "Move X-": "Beveg X-",
   "Move To XY Zero (G0 X0 Y0)": "Beveg til nullpunkt for XY (G0 X0 Y0)",
   "Move X+": "Beveg X+",
-  "Move To Z Zero (G0 Z6)": "Beveg til nullpunkt for Z (G0 Z0)",
+  "Move To Z 6 (G0 Z6)": "Beveg til nullpunkt for Z (G0 Z0)",
   "Move X- Y-": "Beveg X- Y-",
   "Move Y-": "Beveg Y-",
   "Move X+ Y-": "Beveg X+ Y-",
@@ -566,5 +566,14 @@
   "Warning: No custom tool probe commands are defined": "Advarsel: Ingen tilpassede verktøyprobekommandoer er definert",
   "Connect to the controller to view the tool probe commands.": "Koble til kontrolleren for å vise verktøyprobekommandoene.",
   "Manual Tool Change (Custom Probing)": "Manuell verktøyskift (Egendefinert probing)",
-  "This option skips the M6 command and pauses controller operations, giving you full manual control over the tool change process.": "Denne innstillingen hopper over M6-kommandoen og pauser kontrollerens operasjoner, og gir deg full manuell kontroll over verktøyskiftprosessen."
+  "This option skips the M6 command and pauses controller operations, giving you full manual control over the tool change process.": "Denne innstillingen hopper over M6-kommandoen og pauser kontrollerens operasjoner, og gir deg full manuell kontroll over verktøyskiftprosessen.",
+  "Smooth Jog Feed": "",
+  "Fine": "",
+  "Medium": "",
+  "Fast": "",
+  "Smooth Jog: Fine": "",
+  "Smooth Jog: Medium": "",
+  "Smooth Jog: Fast": "",
+  "Smooth Jog Feed Rates (mm/min)": "",
+  "Smooth Jog": ""
 }

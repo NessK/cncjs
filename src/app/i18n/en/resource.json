@@ -255,7 +255,7 @@
   "in": "in",
   "deg": "deg",
   "Zero Out Machine": "Zero Out Machine",
-  "Home Machine": "Home Machine",
+  "Home Axis": "Home Axis",
   "Zero Out Work Offsets": "Zero Out Work Offsets",
   "Set Work Offsets": "Set Work Offsets",
   "Axis": "Axis",
@@ -276,7 +276,7 @@
   "Move X-": "Move X-",
   "Move To XY Zero (G0 X0 Y0)": "Move To XY Zero (G0 X0 Y0)",
   "Move X+": "Move X+",
-  "Move To Z Zero (G0 Z6)": "Move To Z Zero (G0 Z6)",
+  "Move To Z 6 (G0 Z6)": "Move To Z 6 (G0 Z6)",
   "Move X- Y-": "Move X- Y-",
   "Move Y-": "Move Y-",
   "Move X+ Y-": "Move X+ Y-",
@@ -566,5 +566,14 @@
   "Warning: No custom tool probe commands are defined": "Warning: No custom tool probe commands are defined",
   "Connect to the controller to view the tool probe commands.": "Connect to the controller to view the tool probe commands.",
   "Manual Tool Change (Custom Probing)": "Manual Tool Change (Custom Probing)",
-  "This option skips the M6 command and pauses controller operations, giving you full manual control over the tool change process.": "This option skips the M6 command and pauses controller operations, giving you full manual control over the tool change process."
+  "This option skips the M6 command and pauses controller operations, giving you full manual control over the tool change process.": "This option skips the M6 command and pauses controller operations, giving you full manual control over the tool change process.",
+  "Smooth Jog Feed": "Smooth Jog Feed",
+  "Fine": "Fine",
+  "Medium": "Medium",
+  "Fast": "Fast",
+  "Smooth Jog: Fine": "Smooth Jog: Fine",
+  "Smooth Jog: Medium": "Smooth Jog: Medium",
+  "Smooth Jog: Fast": "Smooth Jog: Fast",
+  "Smooth Jog Feed Rates (mm/min)": "Smooth Jog Feed Rates (mm/min)",
+  "Smooth Jog": "Smooth Jog"
 }

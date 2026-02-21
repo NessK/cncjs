@@ -255,7 +255,7 @@
   "in": "inch",
   "deg": "graden",
   "Zero Out Machine": "Machine Op Nul Zetten",
-  "Home Machine": "Home Machine",
+  "Home Axis": "Home Axis",
   "Zero Out Work Offsets": "Werk Offsets Instellen op Nul",
   "Set Work Offsets": "Werk Offsets Instellen",
   "Axis": "As",
@@ -276,7 +276,7 @@
   "Move X-": "Beweeg X-",
   "Move To XY Zero (G0 X0 Y0)": "Beweeg Naar XY Nul (G0 X0 Y0)",
   "Move X+": "Beweeg X+",
-  "Move To Z Zero (G0 Z6)": "Beweeg Naar Z Nul (G0 Z0)",
+  "Move To Z 6 (G0 Z6)": "Beweeg Naar Z Nul (G0 Z0)",
   "Move X- Y-": "Beweeg X- Y-",
   "Move Y-": "Beweeg Y-",
   "Move X+ Y-": "Beweeg X+ Y-",
@@ -566,5 +566,14 @@
   "Warning: No custom tool probe commands are defined": "Waarschuwing: Er zijn geen aangepaste gereedschapsmeetcommando's gedefinieerd",
   "Connect to the controller to view the tool probe commands.": "Verbind met de controller om de gereedschapsmeetcommando's te bekijken",
   "Manual Tool Change (Custom Probing)": "Handmatige gereedschapswissel (Aangepaste meting)",
-  "This option skips the M6 command and pauses controller operations, giving you full manual control over the tool change process.": "Deze optie slaat de M6-opdracht over en pauzeert de controlleroperaties, waardoor je volledige handmatige controle krijgt over het gereedschapswisselproces."
+  "This option skips the M6 command and pauses controller operations, giving you full manual control over the tool change process.": "Deze optie slaat de M6-opdracht over en pauzeert de controlleroperaties, waardoor je volledige handmatige controle krijgt over het gereedschapswisselproces.",
+  "Smooth Jog Feed": "",
+  "Fine": "",
+  "Medium": "",
+  "Fast": "",
+  "Smooth Jog: Fine": "",
+  "Smooth Jog: Medium": "",
+  "Smooth Jog: Fast": "",
+  "Smooth Jog Feed Rates (mm/min)": "",
+  "Smooth Jog": ""
 }

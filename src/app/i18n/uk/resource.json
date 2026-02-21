@@ -266,7 +266,7 @@
   "in": "дюйм",
   "deg": "градус",
   "Zero Out Machine": "Обнулення машинних координат",
-  "Home Machine": "Переміщення в робочий нуль по машинних координатах",
+  "Home Axis": "Переміщення в робочий нуль по машинних координатах",
   "Move Backward": "Переміщення назад",
   "Move Forward": "Переміщення вперед",
   "Zero Out Work Offsets": "Обнулення робочих координат",
@@ -291,7 +291,7 @@
   "Move X-": "Рухатися X-",
   "Move To XY Zero (G0 X0 Y0)": "Перемістити XY на нуль (G0 X0 Y0)",
   "Move X+": "Рухатися X+",
-  "Move To Z Zero (G0 Z6)": "Перемістити Z на нуль (G0 Z0)",
+  "Move To Z 6 (G0 Z6)": "Перемістити Z на нуль (G0 Z0)",
   "Move X- Y-": "Рухатися X- Y-",
   "Move Y-": "Рухатися Y-",
   "Move X+ Y-": "Рухатися X+ Y-",
@@ -566,5 +566,14 @@
   "Warning: No custom tool probe commands are defined": "Попередження: Не визначено власних команд зонда інструменту",
   "Connect to the controller to view the tool probe commands.": "Підключіться до контролера для перегляду команд зонда інструменту.",
   "Manual Tool Change (Custom Probing)": "Ручна заміна інструмента (Користувацьке зондування)",
-  "This option skips the M6 command and pauses controller operations, giving you full manual control over the tool change process.": "Ця опція пропускає команду M6 і призупиняє операції контролера, надаючи повний ручний контроль над процесом заміни інструмента."
+  "This option skips the M6 command and pauses controller operations, giving you full manual control over the tool change process.": "Ця опція пропускає команду M6 і призупиняє операції контролера, надаючи повний ручний контроль над процесом заміни інструмента.",
+  "Smooth Jog Feed": "",
+  "Fine": "",
+  "Medium": "",
+  "Fast": "",
+  "Smooth Jog: Fine": "",
+  "Smooth Jog: Medium": "",
+  "Smooth Jog: Fast": "",
+  "Smooth Jog Feed Rates (mm/min)": "",
+  "Smooth Jog": ""
 }
