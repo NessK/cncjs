@@ -558,7 +558,19 @@ class Combokeys extends events.EventEmitter {
           this.emit(cmd, event, payload);
         };
         Mousetrap.bind(keys, callback);
-        this.list.push({ keys: keys, callback: callback });
+        this.list.push({ keys: keys, callback: callback, action: 'keydown' });
+
+        // Emit a stop event on key release for jog keys.
+        if (cmd === 'JOG') {
+          const stopCallback = (event) => {
+            if (!!o.preventDefault) {
+              preventDefault(event);
+            }
+            this.emit('JOG_STOP', event, payload);
+          };
+          Mousetrap.bind(keys, stopCallback, 'keyup');
+          this.list.push({ keys: keys, callback: stopCallback, action: 'keyup' });
+        }
       });
       this.state.didBindEvents = true;
     }
@@ -568,10 +580,11 @@ class Combokeys extends events.EventEmitter {
         return;
       }
       this.list.forEach((o) => {
-        const { keys, callback } = o;
-        Mousetrap.unbind(keys, callback);
+        const { keys, action } = o;
+        Mousetrap.unbind(keys, action);
       });
       this.state.didBindEvents = false;
+      this.list = [];
     }
 
     reset() {

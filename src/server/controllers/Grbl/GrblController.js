@@ -1384,6 +1384,34 @@ class GrblController {
 
           this.write('\x18'); // ^x
         },
+        'jog:start': () => {
+          let [axes = {}, feedrate = 1000, units = METRIC_UNITS] = args;
+          const jogAxes = Object.keys(axes).reduce((acc, axis) => {
+            const value = Number(axes[axis]) || 0;
+            if (value !== 0) {
+              acc[String(axis).toUpperCase()] = value;
+            }
+            return acc;
+          }, {});
+          const axisWords = _.map(jogAxes, (value, axis) => ('' + axis + value)).join(' ');
+
+          if (!axisWords) {
+            return;
+          }
+
+          feedrate = Math.max(1, Number(feedrate) || 0);
+          const unitModal = (units === IMPERIAL_UNITS) ? 'G20' : 'G21';
+          const jogCommand = `$J=${unitModal}G91 ${axisWords} F${feedrate}`;
+          this.writeln(jogCommand);
+        },
+        'jog:stop': () => {
+          // https://github.com/gnea/grbl/blob/master/doc/markdown/jogging.md
+          this.write('\x85');
+        },
+        'jog:cancel': () => {
+          // https://github.com/gnea/grbl/blob/master/doc/markdown/jogging.md
+          this.write('\x85');
+        },
         'jogCancel': () => {
           // https://github.com/gnea/grbl/blob/master/doc/markdown/jogging.md
           this.write('\x85');
