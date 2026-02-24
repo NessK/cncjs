@@ -1,0 +1,44 @@
+{
+  "cncjs": {
+    "host": "127.0.0.1",
+    "port": 50301,
+    "protocol": "http",
+    "socketPath": "/socket.io",
+    "connectRetryMs": 5000,
+    "token": "",
+    "username": "",
+    "password": ""
+  },
+  "machine": {
+    "port": "COM10",
+    "controllerType": "Grbl",
+    "baudrate": 115200,
+    "autoOpen": false
+  },
+  "jogging": {
+    "singleStep": {
+      "small": 0.1,
+      "medium": 1,
+      "large": 10
+    },
+    "smooth": {
+      "jogStep": 30,
+      "intervalMs": 200,
+      "speedHigh": 5000,
+      "speedMedium": 2000
+    }
+  },
+  "probe": {
+    "enabled": true,
+    "plateThickness": 25,
+    "probeDistance": 20,
+    "feedFast": 75,
+    "feedSlow": 45,
+    "retract1": 2,
+    "liftAfter": 3
+  },
+  "logging": {
+    "verboseKeys": true
+  }
+}
+

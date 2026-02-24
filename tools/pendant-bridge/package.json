@@ -1,0 +1,14 @@
+{
+  "name": "cncjs-pendant-bridge",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Background bridge between BLE HID pendant key combos and CNCjs socket commands",
+  "main": "pendant-bridge.js",
+  "scripts": {
+    "start": "node pendant-bridge.js --config config.json"
+  },
+  "dependencies": {
+    "socket.io-client": "^2.5.0",
+    "uiohook-napi": "^1.5.4"
+  }
+}
