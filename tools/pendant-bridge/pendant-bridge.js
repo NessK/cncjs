@@ -73,6 +73,7 @@ const KEY_CODES = {
     zPos: UiohookKey.Minus,
     zNeg: UiohookKey.Slash,
     zNegAlt: UiohookKey.Backslash,
+    feedHold: UiohookKey.F19,
     p: UiohookKey.P
 };
 
@@ -183,6 +184,14 @@ const jogStop = (config) => {
     socket.emit("command", config.machine.port, "jog:stop");
 };
 
+const feedHold = (config) => {
+    if (!socket || !socket.connected) {
+        return;
+    }
+    socket.emit("command", config.machine.port, "feedhold");
+    console.log("FEED HOLD");
+};
+
 const jogSingleStep = (config, axis, dir, jogDistance) => {
     console.log(`JOG STEP ${axis}${dir}${jogDistance}`);
     write(config, "G91\n");
@@ -280,6 +289,11 @@ const handleKeyDown = (config, keycode, event) => {
 
     if (keycode === KEY_CODES.p && isAlt && !isCtrl) {
         runProbe(config);
+        return;
+    }
+
+    if (keycode === KEY_CODES.feedHold && !isAlt && !isCtrl && !isShift) {
+        feedHold(config);
         return;
     }
 

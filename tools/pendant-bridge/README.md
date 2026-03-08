@@ -81,6 +81,7 @@ On CNC-PC:
 - `.` = Y-
 - `/` = Z+
 - `\` = Z-
+- `F19` = feed hold
 - `; ' , . / \` (no modifier) = small step
 - `Alt + ; ' , . / \` = medium step
 - `Ctrl + ; ' , . / \` = large step
